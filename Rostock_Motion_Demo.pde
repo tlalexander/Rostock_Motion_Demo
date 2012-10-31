@@ -16,6 +16,7 @@ smooth();
 noLoop();
  
 output = createWriter( "motion_demo.gcode" );
+//output.println("M92 X40.0 Y40.0 Z40.0"); 
 output.println("G28"); 
 
 
@@ -27,6 +28,7 @@ void draw()
 xyzPoint p;
 translate(width/2,height/2);
 strokeWeight(2);
+ 
 
 for(int n=0;n<200;n++)
 {
@@ -38,7 +40,7 @@ for(int n=0;n<200;n++)
       
       if(n==0)vertex(p.x,p.y); //for drawing the spiral
       
-      output.println("G1 X"+p.x+" Y"+p.y+" Z"+p.z + " F"+_f); 
+      output.println("G1 X"+p.x+" Y"+p.y+" Z"+p.z+" F"+_f); 
       
       if(n==0&&i==199) endShape(); //for drawing the spiral
     }  
@@ -47,7 +49,7 @@ for(int n=0;n<200;n++)
     {
       p=getdata(i);
       
-       output.println("G1 X"+p.x+" Y"+p.y+" Z"+p.z + " F"+_f);  
+       output.println("G1 X"+p.x+" Y"+p.y+" Z"+p.z+" F"+_f);  
     }
     
     
@@ -62,9 +64,9 @@ println("X extents: "+ minX + ","+maxX +" - Y extents: "+ minY + ","+maxY +" - Z
 xyzPoint getdata(int i)
 {
    xyzPoint pp = new xyzPoint();
-   pp.x= (i*.2)*sin(i/5.0);
-   pp.y = (i*.2)*cos(i/5.0);
-   pp.z = i+100;
+   pp.x= (i*.5)*sin(i/5.0);
+   pp.y = (i*.5)*cos(i/5.0);
+   pp.z = i*1.5+50;
    
    //find extends
    if(maxX<pp.x) maxX=pp.x;
